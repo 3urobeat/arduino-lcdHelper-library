@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 28.08.2022 23:26:20
+ * Last Modified: 29.08.2022 00:26:11
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -44,11 +44,14 @@ private:
 
     uint8_t _lcdCols;
     uint8_t _lcdRows;
+    
+    size_t utf8_strlen(const char *str);
 
 };
 
 
-// Include template implementation file
+// Include template implementation files
 #include "lcdHelper.tpp"
+#include "helpers/stringUtils.tpp"
 
 #endif
