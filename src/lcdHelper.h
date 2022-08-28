@@ -34,6 +34,12 @@ public:
         _lcdRows = rows;
     };
 
+    /**
+     * Clears a specific line on your display
+     * @param row The row to clear (counted from 0)
+     */
+    void clearLine(uint8_t row);
+
 private:
 
     uint8_t _lcdCols;
