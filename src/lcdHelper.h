@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 28.08.2022 20:04:45
+ * Last Modified: 28.08.2022 23:20:05
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -26,18 +26,18 @@ public:
     /**
      * Constructor
      * @param addr The address of your display
-     * @param rows The amount of rows your display haI2Cs
      * @param cols The amount of columns your display has
+     * @param rows The amount of rows your display has
      */
-    lcdHelper(uint8_t addr, uint8_t rows, uint8_t cols) : lcd(addr, rows, cols) {
-        _lcdRows = rows;
+    lcdHelper(uint8_t addr, uint8_t cols, uint8_t rows) : lcd(addr, cols, rows) {
         _lcdCols = cols;
+        _lcdRows = rows;
     };
 
 private:
 
-    uint8_t _lcdRows;
     uint8_t _lcdCols;
+    uint8_t _lcdRows;
 
 };
 
