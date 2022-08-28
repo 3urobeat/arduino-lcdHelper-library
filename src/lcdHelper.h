@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 27.08.2022 14:48:17
+ * Last Modified: 28.08.2022 20:04:45
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -19,22 +19,25 @@
 #define LCDHELPER_H
 
 
-class lcdHelper {
+template <typename lcd>
+class lcdHelper : public lcd { //use template as base to inherit from
 public:
     
     /**
      * Constructor
-     * @param lcd The LiquidCrystal_I2C (or similar) object of the display to control
-     * @param rows The amount of rows your display has
+     * @param addr The address of your display
+     * @param rows The amount of rows your display haI2Cs
      * @param cols The amount of columns your display has
      */
-    lcdHelper(void *lcd, int rows, int cols);
+    lcdHelper(uint8_t addr, uint8_t rows, uint8_t cols) : lcd(addr, rows, cols) {
+        _lcdRows = rows;
+        _lcdCols = cols;
+    };
 
 private:
 
-    void *_lcd;
-    int _lcdRows;
-    int _lcdCols;
+    uint8_t _lcdRows;
+    uint8_t _lcdCols;
 
 };
 

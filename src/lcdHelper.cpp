@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:54
  * Author: 3urobeat
  * 
- * Last Modified: 27.08.2022 14:48:23
+ * Last Modified: 28.08.2022 20:04:10
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -16,11 +16,3 @@
 
 
 #include "lcdHelper.h"
-
-
-//Constructor
-lcdHelper::lcdHelper(void *lcd, int rows, int cols) {
-    _lcd     = lcd;
-    _lcdRows = rows;
-    _lcdCols = cols;
-}
