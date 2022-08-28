@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 29.08.2022 00:26:11
+ * Last Modified: 29.08.2022 00:26:34
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -39,6 +39,14 @@ public:
      * @param row The row to clear (counted from 0)
      */
     void clearLine(uint8_t row);
+
+    /**
+     * Print a string centered on your display
+     * @param str The string to print
+     * @param row The row to print the string in
+     * @param callClearLine Set to true if line should be cleared before printing
+     */
+    void centerPrint(const char *str, uint8_t row, bool callClearLine);
 
 private:
 

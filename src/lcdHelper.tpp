@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 28.08.2022 23:27:43
+ * Last Modified: 29.08.2022 00:23:01
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -19,7 +19,6 @@
 
 
 template <typename lcd>
-
 void lcdHelper<lcd>::clearLine(uint8_t row) {
 
     //print _lcdCols amount of spaces to effectively clear the line
@@ -35,3 +34,19 @@ void lcdHelper<lcd>::clearLine(uint8_t row) {
     lcd::print(str);
     
 }
+
+
+template <typename lcd>
+void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLine) {
+
+    // clear the line first to avoid old characters corrupting the text when content is not the same
+    if (callClearLine) this->clearLine(row);
+
+    // Calculate column
+    int offset = this->_lcdCols - this->utf8_strlen(str);
+    if (offset < 0) offset = 0; //set offset to 0 if it would be negative
+
+    lcd::setCursor(offset / 2, row); //center string
+    lcd::print(str);
+
+};
