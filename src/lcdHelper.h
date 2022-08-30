@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 30.08.2022 16:56:27
+ * Last Modified: 30.08.2022 17:16:07
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -50,6 +50,19 @@ public:
     };
 
     /**
+     * Print a string on your display
+     * @param str The string to print
+     */
+    size_t print(const char *str);
+
+    /**
+     * Print a string on your display
+     * @param col The column to set the cursor to
+     * @param row The row to set the cursor to
+     */
+    void setCursor(uint8_t col, uint8_t row);
+
+    /**
      * Clears a specific line on your display
      * @param row The row to clear (counted from 0)
      */
@@ -68,8 +81,8 @@ private:
     uint8_t _lcdCols;
     uint8_t _lcdRows;
 
-    uint8_t _lcdCursorPos[2] = { 0, 0 }; //save current cursor position
-    char  **_lcdContent;                 //save content of lcd to be able to "read"
+    uint8_t _lcdCursorPos[2] = { 0, 0 }; // (col, row) - save current cursor position
+    char  **_lcdContent;                 // save content of lcd to be able to "read"
     
     size_t utf8_strlen(const char *str);
 
