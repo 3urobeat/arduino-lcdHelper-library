@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 29.08.2022 00:26:34
+ * Last Modified: 30.08.2022 16:56:27
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -32,6 +32,21 @@ public:
     lcdHelper(uint8_t addr, uint8_t cols, uint8_t rows) : lcd(addr, cols, rows) {
         _lcdCols = cols;
         _lcdRows = rows;
+        
+        // initialize lcdContent 2D array with acquired sizes
+        _lcdContent = new char*[rows];
+        for (int i = 0; i < rows; i++)
+            _lcdContent[i] = new char[cols];
+    };
+
+    /**
+     * Destructor
+     */
+    ~lcdHelper() {
+        // delete lcdContent 2D array to avoid mem leaks if user destroys object (if I understand correctly)
+        for (int i = 0; i < this->_lcdRows; i++)
+            delete _lcdContent[i];
+        delete _lcdContent;
     };
 
     /**
@@ -52,6 +67,9 @@ private:
 
     uint8_t _lcdCols;
     uint8_t _lcdRows;
+
+    uint8_t _lcdCursorPos[2] = { 0, 0 }; //save current cursor position
+    char  **_lcdContent;                 //save content of lcd to be able to "read"
     
     size_t utf8_strlen(const char *str);
 
