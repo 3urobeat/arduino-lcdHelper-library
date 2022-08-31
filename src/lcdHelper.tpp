@@ -37,6 +37,16 @@ void lcdHelper<lcd>::setCursor(uint8_t col, uint8_t row) {
 
 // --- Custom Functions ---
 template <typename lcd>
+char* lcdHelper<lcd>::getLcdContent(uint8_t row) {
+    return this->_lcdContent[row];
+}
+
+template <typename lcd>
+uint8_t* lcdHelper<lcd>::getCursorPos() {
+    return this->_lcdCursorPos;
+}
+
+template <typename lcd>
 void lcdHelper<lcd>::clearLine(uint8_t row) {
 
     //print _lcdCols amount of spaces to effectively clear the line

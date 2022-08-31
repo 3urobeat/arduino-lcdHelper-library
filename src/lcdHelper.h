@@ -63,6 +63,19 @@ public:
     void setCursor(uint8_t col, uint8_t row);
 
     /**
+     * Get the display content of a row
+     * @param row The row to get the content of
+     * @return Char array containing the content of the provided row
+     */
+    char* getLcdContent(uint8_t row);
+
+    /**
+     * Get the cursors current column and row position
+     * @return Array: col, row
+     */
+    uint8_t* getCursorPos();
+
+    /**
      * Clears a specific line on your display
      * @param row The row to clear (counted from 0)
      */
