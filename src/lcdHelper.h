@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 30.08.2022 17:16:07
+ * Last Modified: 01.09.2022 16:17:24
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -36,7 +36,7 @@ public:
         // initialize lcdContent 2D array with acquired sizes
         _lcdContent = new char*[rows];
         for (int i = 0; i < rows; i++)
-            _lcdContent[i] = new char[cols];
+            _lcdContent[i] = new char[cols + 1];
     };
 
     /**

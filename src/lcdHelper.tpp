@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 30.08.2022 17:16:00
+ * Last Modified: 01.09.2022 16:55:52
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -49,8 +49,8 @@ uint8_t* lcdHelper<lcd>::getCursorPos() {
 template <typename lcd>
 void lcdHelper<lcd>::clearLine(uint8_t row) {
 
-    //print _lcdCols amount of spaces to effectively clear the line
-    char str[this->_lcdCols]; //_lcdCols counts from 1, so we don't need to do +1 to make space for the null byte
+    // print _lcdCols amount of spaces to effectively clear the line
+    char str[this->_lcdCols + 1]; // make space for null byte
 
     for (int i = 0; i < this->_lcdCols; i++) {
         str[i] = ' ';
@@ -58,8 +58,8 @@ void lcdHelper<lcd>::clearLine(uint8_t row) {
 
     str[this->_lcdCols] = '\0';
 
-    lcd::setCursor(0, row);
-    lcd::print(str);
+    this->setCursor(0, row);
+    this->print(str);
     
 }
 
@@ -73,7 +73,7 @@ void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLin
     int offset = this->_lcdCols - this->utf8_strlen(str);
     if (offset < 0) offset = 0; //set offset to 0 if it would be negative
 
-    lcd::setCursor(offset / 2, row); //center string
-    lcd::print(str);
+    this->setCursor(offset / 2, row); //center string
+    this->print(str);
 
 };
