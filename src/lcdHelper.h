@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 01.09.2022 16:17:24
+ * Last Modified: 03.09.2022 22:37:37
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -89,6 +89,14 @@ public:
      */
     void centerPrint(const char *str, uint8_t row, bool callClearLine);
 
+
+    /**
+     * Prints a String that will be moved on the screen each time the method is called
+     * @param str The string to print
+     * @param row The row to print the string in
+     */
+    void movingPrint(const char *str, uint8_t row);
+
 private:
 
     uint8_t _lcdCols;
@@ -96,6 +104,8 @@ private:
 
     uint8_t _lcdCursorPos[2] = { 0, 0 }; // (col, row) - save current cursor position
     char  **_lcdContent;                 // save content of lcd to be able to "read"
+
+    uint8_t _moveOffset = 0;
     
     size_t utf8_strlen(const char *str);
 
