@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 03.09.2022 22:36:24
+ * Last Modified: 04.09.2022 22:48:51
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -32,6 +32,22 @@ void lcdHelper<lcd>::setCursor(uint8_t col, uint8_t row) {
     this->_lcdCursorPos[1] = row;
 
     lcd::setCursor(col, row);
+}
+
+template <typename lcd>
+void lcdHelper<lcd>::home() {
+    this->_lcdCursorPos[0] = 0;
+    this->_lcdCursorPos[1] = 0;
+
+    lcd::home();
+}
+
+template <typename lcd>
+void lcdHelper<lcd>::clear() {
+    for (int row = 0; row < this->_lcdRows; row++)
+        memset(this->_lcdContent[row], ' ', strlen(this->_lcdContent[row]) - 1); // fill row with spaces but keep null byte at the end
+
+    lcd::clear();
 }
 
 

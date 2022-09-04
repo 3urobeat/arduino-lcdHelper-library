@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 03.09.2022 22:37:37
+ * Last Modified: 04.09.2022 22:07:44
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -61,6 +61,16 @@ public:
      * @param row The row to set the cursor to
      */
     void setCursor(uint8_t col, uint8_t row);
+
+    /**
+     * Moves cursor to 0, 0.
+     */
+    void home();
+
+    /**
+     * Clears the whole display. Use clearLine() to clear only a specific row.
+     */
+    void clear();
 
     /**
      * Get the display content of a row
