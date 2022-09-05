@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 19:10:44
+ * Last Modified: 05.09.2022 20:15:56
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -83,9 +83,11 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t row) {
 template <typename lcd>
 void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t width) {
     
-    char temp[width + 1] = "";
-    
-    size_t len = utf8_strlen(str);
+    // Workarounds to correctly display Umlaute
+    size_t len = utf8_strlen(str); // length on the display
+    size_t blen = strlen(str);     // actual length in mem
+
+    char temp[width + (blen - len) + 1] = ""; // blen - len to correct deviation caused by 2 byte long chars (Umlaute)
 
     // check if we even have to do something
     if (len == width) {
@@ -103,14 +105,14 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
         // switch case doesn't work with strings so here we go
         if (strcmp(align, "left") == 0) {
             strcpy(temp, str);
-            memset(temp + len, ' ', width - len); // fill remaining space with spaces and keep existing null byte at the end
+            memset(temp + blen, ' ', width - len); // fill remaining space with spaces and keep existing null byte at the end
 
         } else if (strcmp(align, "center") == 0) {
             int offset = (width - len) / 2; // calculate offset to the left
 
             memset(temp, ' ', offset); // offset str with spaces
             strcat(temp, str);         // put str into the middle
-            memset(temp + offset + len, ' ', width - offset - len); // fill remaining space with spaces
+            memset(temp + offset + blen, ' ', width - offset - len); // fill remaining space with spaces
             
         } else if (strcmp(align, "right") == 0) {
             memset(temp, ' ', width - len); // offset string
