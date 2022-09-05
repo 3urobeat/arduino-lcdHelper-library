@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 15:19:13
+ * Last Modified: 05.09.2022 15:19:58
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -56,14 +56,18 @@ public:
      */
     void movingPrint(const char *str, uint8_t row);
 
+    
+    /**
+     * Better strlen function to correctly count chars that are two bytes long (like ä ö or ü)
+     */
+    size_t utf8_strlen(const char *str);
+
 private:
 
     uint8_t _lcdCols;
     uint8_t _lcdRows;
     
     uint8_t _moveOffset = 0;
-
-    size_t utf8_strlen(const char *str);
 
 };
 
