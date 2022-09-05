@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 15:19:58
+ * Last Modified: 05.09.2022 19:13:18
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -48,7 +48,6 @@ public:
      */
     void centerPrint(const char *str, uint8_t row, bool callClearLine);
 
-
     /**
      * Prints a String that will be moved on the screen each time the method is called
      * @param str The string to print
@@ -56,6 +55,13 @@ public:
      */
     void movingPrint(const char *str, uint8_t row);
 
+    /**
+     * Print a string aligned left, center or right to a fixed width.
+     * @param align "left", "center" or "right"
+     * @param str The string to print
+     * @param width The fixed width of the resulting string, which str will be aligned to
+     */
+    void alignedPrint(const char *align, const char *str, uint8_t width);
     
     /**
      * Better strlen function to correctly count chars that are two bytes long (like ä ö or ü)
