@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 13:59:49
+ * Last Modified: 05.09.2022 14:26:21
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -21,6 +21,17 @@
 // --- Overwritten Functions ---
 template <typename lcd>
 size_t lcdHelper<lcd>::print(const char *str) {
+    strncpy(this->_lcdContent[this->_lcdCursorPos[1]] + this->_lcdCursorPos[0], str, this->_lcdCols - this->_lcdCursorPos[0]); // update local storage of lcd content
+
+    //check if str is longer than place available and use cut down version from _lcdContent
+    if ((uint8_t) strlen(str) > this->_lcdCols - this->_lcdCursorPos[0]) {
+        this->setCursor(0, this->_lcdCursorPos[1]);
+
+        return lcd::print(this->_lcdContent[this->_lcdCursorPos[1]]);
+    } else {
+        return lcd::print(str);
+    }
+}
     strncpy(this->_lcdContent[this->_lcdCursorPos[1]], str, this->_lcdCols); // update local storage of lcd content
 
     return lcd::print(str);
