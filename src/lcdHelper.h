@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 04.09.2022 22:07:44
+ * Last Modified: 05.09.2022 13:58:38
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -35,8 +35,12 @@ public:
         
         // initialize lcdContent 2D array with acquired sizes
         _lcdContent = new char*[rows];
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < rows; i++) {
             _lcdContent[i] = new char[cols + 1];
+
+            memset(_lcdContent[i], ' ', cols); // fill row with spaces to indicate row is empty
+            _lcdContent[i][cols + 1] = '\0';
+        }
     };
 
     /**
