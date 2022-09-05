@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 14:33:19
+ * Last Modified: 05.09.2022 14:43:34
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -38,10 +38,6 @@ size_t lcdHelper<lcd>::print(char chr) {
     this->_lcdContent[this->_lcdCursorPos[1]][this->_lcdCursorPos[0]] = chr; // update local storage of lcd content
 
     return lcd::print(chr);
-}
-    strncpy(this->_lcdContent[this->_lcdCursorPos[1]], str, this->_lcdCols); // update local storage of lcd content
-
-    return lcd::print(str);
 }
 
 template <typename lcd>
