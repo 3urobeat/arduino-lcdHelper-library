@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 14:43:34
+ * Last Modified: 05.09.2022 19:16:28
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -136,6 +136,48 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t row) {
         
         this->setCursor(0, row);
         this->print(str);
+    }
+
+}
+
+template <typename lcd>
+void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t width) {
+    
+    char temp[width + 1] = "";
+    
+    size_t len = utf8_strlen(str);
+
+    // check if we even have to do something
+    if (len == width) {
+        this->print(str); 
+        return;
+    }
+
+    // check if string is too long, cut it and display it as is
+    if (len > width) {
+        strncpy(temp, str, width);
+        this->print(temp);
+
+    } else { //if shorter, align text as requested
+
+        // switch case doesn't work with strings so here we go
+        if (strcmp(align, "left") == 0) {
+            strcpy(temp, str);
+            memset(temp + len, ' ', width - len); // fill remaining space with spaces and keep existing null byte at the end
+
+        } else if (strcmp(align, "center") == 0) {
+            int offset = (width - len) / 2; // calculate offset to the left
+
+            memset(temp, ' ', offset); // offset str with spaces
+            strcat(temp, str);         // put str into the middle
+            memset(temp + offset + len, ' ', width - offset - len); // fill remaining space with spaces
+            
+        } else if (strcmp(align, "right") == 0) {
+            memset(temp, ' ', width - len); // offset string
+            strcpy(temp + width - len, str);
+        }
+
+        this->print(temp);
     }
 
 }
