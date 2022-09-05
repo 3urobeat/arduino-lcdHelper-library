@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 13:58:38
+ * Last Modified: 05.09.2022 14:33:21
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -58,6 +58,12 @@ public:
      * @param str The string to print
      */
     size_t print(const char *str);
+
+    /**
+     * Print a char on your display
+     * @param chr The char to print
+     */
+    size_t print(char chr);
 
     /**
      * Print a string on your display
