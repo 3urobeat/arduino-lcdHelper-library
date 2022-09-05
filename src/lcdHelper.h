@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 14:33:21
+ * Last Modified: 05.09.2022 15:19:13
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -32,68 +32,7 @@ public:
     lcdHelper(uint8_t addr, uint8_t cols, uint8_t rows) : lcd(addr, cols, rows) {
         _lcdCols = cols;
         _lcdRows = rows;
-        
-        // initialize lcdContent 2D array with acquired sizes
-        _lcdContent = new char*[rows];
-        for (int i = 0; i < rows; i++) {
-            _lcdContent[i] = new char[cols + 1];
-
-            memset(_lcdContent[i], ' ', cols); // fill row with spaces to indicate row is empty
-            _lcdContent[i][cols + 1] = '\0';
-        }
     };
-
-    /**
-     * Destructor
-     */
-    ~lcdHelper() {
-        // delete lcdContent 2D array to avoid mem leaks if user destroys object (if I understand correctly)
-        for (int i = 0; i < this->_lcdRows; i++)
-            delete _lcdContent[i];
-        delete _lcdContent;
-    };
-
-    /**
-     * Print a string on your display
-     * @param str The string to print
-     */
-    size_t print(const char *str);
-
-    /**
-     * Print a char on your display
-     * @param chr The char to print
-     */
-    size_t print(char chr);
-
-    /**
-     * Print a string on your display
-     * @param col The column to set the cursor to
-     * @param row The row to set the cursor to
-     */
-    void setCursor(uint8_t col, uint8_t row);
-
-    /**
-     * Moves cursor to 0, 0.
-     */
-    void home();
-
-    /**
-     * Clears the whole display. Use clearLine() to clear only a specific row.
-     */
-    void clear();
-
-    /**
-     * Get the display content of a row
-     * @param row The row to get the content of
-     * @return Char array containing the content of the provided row
-     */
-    char* getLcdContent(uint8_t row);
-
-    /**
-     * Get the cursors current column and row position
-     * @return Array: col, row
-     */
-    uint8_t* getCursorPos();
 
     /**
      * Clears a specific line on your display
@@ -121,12 +60,9 @@ private:
 
     uint8_t _lcdCols;
     uint8_t _lcdRows;
-
-    uint8_t _lcdCursorPos[2] = { 0, 0 }; // (col, row) - save current cursor position
-    char  **_lcdContent;                 // save content of lcd to be able to "read"
-
-    uint8_t _moveOffset = 0;
     
+    uint8_t _moveOffset = 0;
+
     size_t utf8_strlen(const char *str);
 
 };
