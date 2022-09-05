@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 04.09.2022 22:48:51
+ * Last Modified: 05.09.2022 13:59:49
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -28,6 +28,8 @@ size_t lcdHelper<lcd>::print(const char *str) {
 
 template <typename lcd>
 void lcdHelper<lcd>::setCursor(uint8_t col, uint8_t row) {
+    if (col >= this->_lcdCols - 1 || row >= this->_lcdRows - 1) return; //check for invalid cursor placement
+
     this->_lcdCursorPos[0] = col;
     this->_lcdCursorPos[1] = row;
 
