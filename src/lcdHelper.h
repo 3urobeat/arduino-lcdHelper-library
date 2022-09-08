@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 12:41:13
+ * Last Modified: 08.09.2022 14:34:09
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -53,7 +53,7 @@ public:
      * @param str The string to print
      * @param row The row to print the string in
      */
-    void movingPrint(const char *str, uint8_t row);
+    void movingPrint(const char *str, uint8_t *moveOffset, uint8_t row);
 
     /**
      * Print a string aligned left, center or right to a fixed width.
@@ -81,8 +81,6 @@ private:
 
     uint8_t _lcdCols;
     uint8_t _lcdRows;
-    
-    uint8_t _moveOffset = 0;
 
 };
 

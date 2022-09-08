@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 05.09.2022 20:15:56
+ * Last Modified: 08.09.2022 14:40:31
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -51,15 +51,15 @@ void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLin
 }
 
 template <typename lcd>
-void lcdHelper<lcd>::movingPrint(const char *str, uint8_t row) {
+void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t row) {
 
     // check if we actually have to move something
     if (strlen(str) > this->_lcdCols) {
-        if (this->_moveOffset + this->_lcdCols > strlen(str)) this->_moveOffset = 0; // reset if string was fully displayed
+        if (*moveOffset + this->_lcdCols > strlen(str)) *moveOffset = 0; // reset if string was fully displayed
 
         char temp[this->_lcdCols + 1] = ""; // leave space for next char and null byte
 
-        strncpy(temp, str + this->_moveOffset, this->_lcdCols); // substring to current offset
+        strncpy(temp, str + *moveOffset, this->_lcdCols); // substring to current offset
         
         // Fix for Umlaute: Add more chars if at least one two byte long char is included to avoid message being too short on the display
         strncat(temp, str + this->_lcdCols + this->_moveOffset, this->_lcdCols - this->utf8_strlen(temp));
@@ -70,7 +70,7 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t row) {
         this->print(temp);
 
         // Increase offset
-        this->_moveOffset++;
+        (*moveOffset)++;
 
     } else {
         
