@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 20:07:47
+ * Last Modified: 18.11.2022 11:32:58
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -44,9 +44,9 @@ public:
      * Print a string centered on your display
      * @param str The string to print
      * @param row The row to print the string in
-     * @param callClearLine Set to true if line should be cleared before printing
+     * @param callClearLine Optional: Set to true if line should be cleared before printing
      */
-    void centerPrint(const char *str, uint8_t row, bool callClearLine);
+    void centerPrint(const char *str, uint8_t row, bool callClearLine = false);
 
     /**
      * Prints a String that will be moved by one char each time the method is called
