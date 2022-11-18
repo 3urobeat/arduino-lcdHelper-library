@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 18.11.2022 11:32:58
+ * Last Modified: 18.11.2022 15:08:26
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -86,8 +86,7 @@ private:
 };
 
 
-// Include template implementation files
+// Include template implementation file
 #include "lcdHelper.tpp"
-#include "helpers/stringUtils.tpp"
 
 #endif

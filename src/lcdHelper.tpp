@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 08.09.2022 20:08:33
+ * Last Modified: 18.11.2022 14:43:43
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -121,5 +121,28 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
 
         this->print(temp);
     }
+
+}
+
+template <typename lcd>
+size_t lcdHelper<lcd>::utf8_strlen(const char *str) {
+    
+    int len = 0;
+    while (*str) len += (*str++ & 0xc0) != 0x80;
+    return len;
+
+}
+
+template <typename lcd>
+char* lcdHelper<lcd>::toFixedLengthNumber(char *dest, int num, uint8_t len) {
+
+    char numStr[len + 1] = ""; // no real way to check how long num will be so let's just use len as it will always be >=
+
+    itoa(num, numStr, 10); // convert int and save into numStr
+
+    memset(dest, '0', len - strlen(numStr)); // set all chars except the ones used by numStr to 0 (not \0 kek)
+    strcpy(dest + (len - strlen(numStr)), numStr); // finally add the number itself to the end (use strcpy instead of strcat to make sure numStr ends up at the correct place)
+
+    return dest; // return pointer to dest again to make using the function inside another call easier
 
 }
