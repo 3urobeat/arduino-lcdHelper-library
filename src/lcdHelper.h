@@ -72,7 +72,9 @@ public:
     void limitedPrint(const char *str, uint8_t length);
     
     /**
-     * Better strlen function to correctly count chars that are two bytes long (like ä ö or ü)
+     * Custom strlen function to correctly count chars that are two bytes long (like ä ö or ü)
+     * @param str The string to get the length of
+     * @return Length of str
      */
     size_t utf8_strlen(const char *str);
 

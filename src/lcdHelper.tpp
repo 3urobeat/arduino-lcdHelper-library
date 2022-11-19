@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 19.11.2022 21:38:27
+ * Last Modified: 19.11.2022 21:52:29
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -51,28 +51,16 @@ void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLin
 template <typename lcd>
 void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t width)
 {
-    // check if we actually have to move something
-    if (strlen(str) > width) {
-        if (*moveOffset + width > strlen(str)) *moveOffset = 0; // reset if string was fully displayed
+    // Check if we actually have to move something
+    if (utf8_strlen(str) > width) {
+        if (*moveOffset + width > strlen(str)) *moveOffset = 0; // Reset if string was fully displayed
 
-        char temp[width + 1] = ""; // leave space for next char and null byte
-
-        strncpy(temp, str + *moveOffset, width); // substring to current offset
-        
-        // Fix for Umlaute: Add more chars if at least one two byte long char is included to avoid message being too short on the display
-        //strncat(temp, str + width + moveOffset, width - this->utf8_strlen(temp));
-        // Using Umlaute is still a bit janky but this is definitely an improvement. I'm not sure right now what else I could do.
-
-        // TODO: lcd.movingPrint("Größe Menschen mit größen Füßen bräuchen größe Schuhe", 1);
-
-        // Print current string
-        this->print(temp);
+        // Print width amount of chars, starting from current moveOffset using our fancy limitedPrint function to correctly display two byte long chars (UTF-8)
+        this->limitedPrint(str + *moveOffset, width);
 
         // Increase offset
         (*moveOffset)++;
-
     } else {
-        
         this->print(str);
     }
 }
@@ -134,7 +122,7 @@ void lcdHelper<lcd>::limitedPrint(const char *str, uint8_t length)
 
             // If we've encountered a 2 byte long char, we need to copy this and the next byte and print as a whole
             if (thisCharLen == 0) {
-                char temp[3] = ""; // Create 2 byte + null char long temp char arr
+                char temp[3] = ""; // Create 2 byte + null char long temp char arr // TODO: Can this be optimized to work without temp?
 
                 strncpy(temp, str + index, 2); // Copy both bytes, then print
                 this->print(temp);
@@ -156,7 +144,7 @@ void lcdHelper<lcd>::limitedPrint(const char *str, uint8_t length)
 template <typename lcd>
 size_t lcdHelper<lcd>::utf8_strlen(const char *str)
 {
-    int len = 0;
+    size_t len = 0;
     while (*str) len += (*str++ & 0xc0) != 0x80;
     return len;
 }
