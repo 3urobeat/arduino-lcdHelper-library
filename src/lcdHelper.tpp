@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 18.11.2022 14:43:43
+ * Last Modified: 19.11.2022 14:59:58
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -19,8 +19,8 @@
 
 
 template <typename lcd>
-void lcdHelper<lcd>::clearLine(uint8_t row) {
-
+void lcdHelper<lcd>::clearLine(uint8_t row)
+{
     // print _lcdCols amount of spaces to effectively clear the line
     char str[this->_lcdCols + 1]; // make space for null byte
 
@@ -32,12 +32,11 @@ void lcdHelper<lcd>::clearLine(uint8_t row) {
 
     this->setCursor(0, row);
     this->print(str);
-    
 }
 
 template <typename lcd>
-void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLine) {
-
+void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLine)
+{
     // clear the line first to avoid old characters corrupting the text when content is not the same
     if (callClearLine) this->clearLine(row);
 
@@ -47,12 +46,11 @@ void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLin
 
     this->setCursor(offset / 2, row); //center string
     this->print(str);
-
 }
 
 template <typename lcd>
-void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t width) {
-
+void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t width)
+{
     // check if we actually have to move something
     if (strlen(str) > width) {
         if (*moveOffset + width > strlen(str)) *moveOffset = 0; // reset if string was fully displayed
@@ -77,12 +75,11 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t w
         
         this->print(str);
     }
-
 }
 
 template <typename lcd>
-void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t width) {
-    
+void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t width)
+{
     // Workarounds to correctly display Umlaute
     size_t len = utf8_strlen(str); // length on the display
     size_t blen = strlen(str);     // actual length in mem
@@ -121,21 +118,19 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
 
         this->print(temp);
     }
-
 }
 
 template <typename lcd>
-size_t lcdHelper<lcd>::utf8_strlen(const char *str) {
-    
+size_t lcdHelper<lcd>::utf8_strlen(const char *str)
+{
     int len = 0;
     while (*str) len += (*str++ & 0xc0) != 0x80;
     return len;
-
 }
 
 template <typename lcd>
-char* lcdHelper<lcd>::toFixedLengthNumber(char *dest, int num, uint8_t len) {
-
+char* lcdHelper<lcd>::toFixedLengthNumber(char *dest, int num, uint8_t len)
+{
     char numStr[len + 1] = ""; // no real way to check how long num will be so let's just use len as it will always be >=
 
     itoa(num, numStr, 10); // convert int and save into numStr
@@ -144,5 +139,4 @@ char* lcdHelper<lcd>::toFixedLengthNumber(char *dest, int num, uint8_t len) {
     strcpy(dest + (len - strlen(numStr)), numStr); // finally add the number itself to the end (use strcpy instead of strcat to make sure numStr ends up at the correct place)
 
     return dest; // return pointer to dest again to make using the function inside another call easier
-
 }
