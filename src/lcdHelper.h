@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 18.11.2022 15:08:26
+ * Last Modified: 19.11.2022 18:53:32
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -63,6 +63,13 @@ public:
      * @param width The fixed width of the resulting string, which str will be aligned to
      */
     void alignedPrint(const char *align, const char *str, uint8_t width);
+
+    /**
+     * Prints a string to the dislay with a limited length (UTF-8 aware) without making a copy.
+     * @param str The string to print
+     * @param length The length to limit str to
+     */
+    void limitedPrint(const char *str, uint8_t length);
     
     /**
      * Better strlen function to correctly count chars that are two bytes long (like ä ö or ü)

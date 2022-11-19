@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 19.11.2022 14:59:58
+ * Last Modified: 19.11.2022 21:38:27
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -117,6 +117,39 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
         }
 
         this->print(temp);
+    }
+}
+
+template <typename lcd> 
+void lcdHelper<lcd>::limitedPrint(const char *str, uint8_t length)
+{
+    // Check if we actually have to do something
+    if (this->utf8_strlen(str) > length) {
+        uint8_t currentLen = 0; // UTF-8
+        uint8_t index      = 0; // Actual location in the char arr
+ 
+        // Print all chars until utf8_strlen() == length is reached
+        while (currentLen < length) { // Check above guarantees we can't exceed
+            uint8_t thisCharLen = (*(str + index + 1) & 0xc0) != 0x80; // Count only one byte of a 2 byte long char (from utf8_strlen())
+
+            // If we've encountered a 2 byte long char, we need to copy this and the next byte and print as a whole
+            if (thisCharLen == 0) {
+                char temp[3] = ""; // Create 2 byte + null char long temp char arr
+
+                strncpy(temp, str + index, 2); // Copy both bytes, then print
+                this->print(temp);
+                
+                index += 2; // Count both bytes
+            } else {
+                this->print(*(str + index)); // Simply print this char
+                
+                index++; // Count this one char
+            }
+
+            currentLen++; 
+        }
+    } else {
+        this->print(str); // Print as is if str is shorter than length
     }
 }
 
