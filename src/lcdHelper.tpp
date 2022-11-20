@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 19.11.2022 22:48:24
+ * Last Modified: 20.11.2022 21:20:22
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -57,8 +57,8 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t w
         uint8_t char0Len = (*(str + *moveOffset) & 0xc0) != 0x80;
         if (char0Len == 0) (*moveOffset)++;
 
-        // Reset if string was fully displayed
-        if (*moveOffset + width > strlen(str)) *moveOffset = 0;
+        // Reset if string was fully displayed by checking if what is left over of the string would not fill the whole width anymore
+        if (utf8_strlen(str + *moveOffset) < width) *moveOffset = 0;
 
         // Print width amount of chars, starting from current moveOffset using our fancy limitedPrint function to correctly display two byte long chars (UTF-8)
         this->limitedPrint(str + *moveOffset, width);
