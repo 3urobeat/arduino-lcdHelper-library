@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 21.11.2022 11:10:05
+ * Last Modified: 21.11.2022 12:13:08
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -49,7 +49,7 @@ public:
     void centerPrint(const char *str, uint8_t row, bool callClearLine = false);
 
     /**
-     * Prints a char array that will be moved by one char each time the method is called
+     * Prints a char array that will be moved across a row by one char each time the function is called
      * @param str The char array to print
      * @param moveOffset Pointer to int tracking offset
      * @param width Width of the space on screen the char array will be moved across
@@ -65,7 +65,7 @@ public:
     void alignedPrint(const char *align, const char *str, uint8_t width);
 
     /**
-     * Prints a char array to the dislay with a limited length (UTF-8 aware) without making a copy.
+     * Prints a char array to the display with a limited length (UTF-8 aware) without making a copy.
      * @param str The char array to print
      * @param length The length to limit str to
      */
