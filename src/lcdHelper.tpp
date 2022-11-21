@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 20.11.2022 21:20:22
+ * Last Modified: 21.11.2022 11:09:24
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -44,7 +44,7 @@ void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLin
     int offset = this->_lcdCols - this->utf8_strlen(str);
     if (offset < 0) offset = 0; //set offset to 0 if it would be negative
 
-    this->setCursor(offset / 2, row); //center string
+    this->setCursor(offset / 2, row); //center char array
     this->print(str);
 }
 
@@ -57,7 +57,7 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t w
         uint8_t char0Len = (*(str + *moveOffset) & 0xc0) != 0x80;
         if (char0Len == 0) (*moveOffset)++;
 
-        // Reset if string was fully displayed by checking if what is left over of the string would not fill the whole width anymore
+        // Reset if char array was fully displayed by checking if what is left over of the char array would not fill the whole width anymore
         if (utf8_strlen(str + *moveOffset) < width) *moveOffset = 0;
 
         // Print width amount of chars, starting from current moveOffset using our fancy limitedPrint function to correctly display two byte long chars (UTF-8)
@@ -85,14 +85,14 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
         return;
     }
 
-    // check if string is too long, cut it and display it as is
+    // check if char array is too long, cut it and display it as is
     if (len > width) {
         strncpy(temp, str, width);
         this->print(temp);
 
     } else { //if shorter, align text as requested
 
-        // switch case doesn't work with strings so here we go
+        // switch case doesn't work with char arrays so here we go
         if (strcmp(align, "left") == 0) {
             strcpy(temp, str);
             memset(temp + blen, ' ', width - len); // fill remaining space with spaces and keep existing null byte at the end
@@ -105,7 +105,7 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
             memset(temp + offset + blen, ' ', width - offset - len); // fill remaining space with spaces
             
         } else if (strcmp(align, "right") == 0) {
-            memset(temp, ' ', width - len); // offset string
+            memset(temp, ' ', width - len); // offset char array
             strcpy(temp + width - len, str);
         }
 
