@@ -104,6 +104,7 @@ Custom strlen function to correctly count chars that are two bytes long (like ä
 - `num` - The number to convert
 - `len` - The length the resulting char array will have. Zeroes will be added infront of num until it matches this length
 
+Returns pointer to `dest` so that you can use it directly inside another function.  
 Converts num to char array and precedes it with zeroes to match length.  
 Make sure buf is at least len bytes long!  
 
@@ -115,4 +116,7 @@ char temp[3] = ""; // Buffer char array
 // Uptime in minutes, 5 will be written as 05 into temp to match len 2
 lcd.toFixedLengthNumber(temp, (uptime % 3600) / 60, 2);
 lcd.print(temp); // Print "05" to display
+
+// ...or make use of return to print directly
+lcd.print(lcd.toFixedLengthNumber(temp, (uptime % 3600) / 60, 2));
 ```
