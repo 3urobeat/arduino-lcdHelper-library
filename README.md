@@ -31,6 +31,10 @@ You can now initialize the lib just like shown above by calling the `lcdHelper` 
 &nbsp;
 
 ## Functions added by lcdHelper
+Check out the example sketch showcasing every function [here](https://github.com/HerrEurobeat/arduino-lcdHelper-library/blob/main/examples/example.cpp)!  
+
+&nbsp;
+
 ### lcdHelper<YOUR_LCD_LIBRARY> objectName(uint8_t addr, uint8_t cols, uint8_t rows)
 - `addr` - Address of your display, usually `0x27` I think
 - `cols` - The amount of columns your display has. When you have a 4x20 display for example, provide 20 here
