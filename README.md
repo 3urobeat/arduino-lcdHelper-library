@@ -6,7 +6,7 @@ All functions are documented below.
 
 &nbsp;
 
-The library is made for [LiquidCrystal_I2C](https://github.com/johnrickman/LiquidCrystal_I2C) but was mainly developed using a fork called [NoiascaLiquidCrystal](https://werner.rothschopf.net/202003_arduino_liquid_crystal_umlaute.htm) to support German UTF-8 chars.  
+The library is made for [LiquidCrystal_I2C](https://github.com/johnrickman/LiquidCrystal_I2C) but was mainly developed using a fork called [NoiascaLiquidCrystal](https://werner.rothschopf.net/202009_arduino_liquid_crystal_intro.htm) to support German UTF-8 chars.  
 
 The library only supports C char arrays, no Arduino or C++ Strings, to be more efficient on these low memory devices.  
 You can still pass Strings to functions provided by `LiquidCrystal` as they are inherited.  
