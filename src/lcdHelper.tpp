@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 21.11.2022 11:09:24
+ * Last Modified: 23.11.2022 11:15:18
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -21,17 +21,12 @@
 template <typename lcd>
 void lcdHelper<lcd>::clearLine(uint8_t row)
 {
-    // print _lcdCols amount of spaces to effectively clear the line
-    char str[this->_lcdCols + 1]; // make space for null byte
-
-    for (int i = 0; i < this->_lcdCols; i++) {
-        str[i] = ' ';
-    }
-
-    str[this->_lcdCols] = '\0';
-
+    // Print _lcdCols amount of spaces to effectively clear the line
     this->setCursor(0, row);
-    this->print(str);
+
+    for (uint8_t i = 0; i < this->_lcdCols; i++) {
+        this->print(" ");
+    }
 }
 
 template <typename lcd>
