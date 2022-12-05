@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 05.12.2022 21:55:12
+ * Last Modified: 05.12.2022 21:56:05
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -66,6 +66,17 @@ public:
      * @param row The row to print the animation in
      */
     void animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row);
+
+    // Provide a few default animation (see chars that are referenced as hex here: https://werner.rothschopf.net/2020/lcd_charset_a00.gif)
+    struct {
+        const char *loading[8]  = { "|", "/", "-", "\x60", "|", "/", "-", "\x60" };                                                       // animationSize: 8
+        const char *waiting[5]  = { "    ", ".   ", "..  ", "... ", "...." };                                                             // animationSize: 5
+        const char *bounce[10]  = { "=     ", " =    ", "  =   ", "   =  ", "    = ", "     =", "    = ", "   =  ", "  =   ", " =    " }; // animationSize: 10
+        const char *progress[6] = { "     ", "\xFF    ", "\xFF\xFF   ", "\xFF\xFF\xFF  ", "\xFF\xFF\xFF\xFF ", "\xFF\xFF\xFF\xFF\xFF" };  // animationSize: 6
+        const char *arrows[5]   = { "    ", ">   ", ">>  ", ">>> ", ">>>>" };                                                             // animationSize: 5
+        const char *bouncearrow[10] = { ">    ", " >   ", "  >  ", "   > ", "    >", "    <", "   < ", "  <  ", " <   ", "<    " };       // animationSize: 10
+    } animations;
+
     /**
      * Print a char array aligned left, center or right to a fixed width.
      * @param align "left", "center" or "right"
