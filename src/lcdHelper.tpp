@@ -4,7 +4,7 @@
  * Created Date: 28.08.2022 22:55:04
  * Author: 3urobeat
  * 
- * Last Modified: 23.11.2022 11:15:18
+ * Last Modified: 05.12.2022 21:55:08
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -63,6 +63,19 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t w
     } else {
         this->print(str);
     }
+}
+
+template <typename lcd>
+void lcdHelper<lcd>::animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row)
+{
+    // Print current frame and overwrite previous one
+    this->setCursor(col, row);
+    this->print(animationArray[*animationFrame]);
+
+    // Increment index or reset if all frames were displayed
+    (*animationFrame)++;
+    
+    if (*animationFrame > animationSize - 1) *animationFrame = 0;
 }
 
 template <typename lcd>

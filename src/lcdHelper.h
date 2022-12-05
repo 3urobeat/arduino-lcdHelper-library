@@ -4,7 +4,7 @@
  * Created Date: 26.08.2022 12:04:51
  * Author: 3urobeat
  * 
- * Last Modified: 21.11.2022 19:16:44
+ * Last Modified: 05.12.2022 21:55:12
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -57,6 +57,15 @@ public:
      */
     void movingPrint(const char *str, uint8_t *moveOffset, uint8_t width);
 
+    /**
+     * Print an animation frame by frame each time the function is called
+     * @param animationArray Pointer to an array containing char arrays for each animation frame
+     * @param animationSize Amount of frames your animation has, counting from 1
+     * @param animationFrame Pointer to int tracking animation progress
+     * @param col The column to print the animation at
+     * @param row The row to print the animation in
+     */
+    void animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row);
     /**
      * Print a char array aligned left, center or right to a fixed width.
      * @param align "left", "center" or "right"
