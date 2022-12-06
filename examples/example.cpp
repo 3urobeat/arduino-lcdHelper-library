@@ -4,7 +4,7 @@
  * Created Date: 22.11.2022 16:50:28
  * Author: 3urobeat
  * 
- * Last Modified: 06.12.2022 11:32:29
+ * Last Modified: 06.12.2022 12:03:47
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -43,7 +43,7 @@ uint8_t moveOffset = 0;
 uint8_t dots       = 0; // also save the dots progress of our little animation for later
 
 
-// Setup display and enable backlight
+// Setup display, enable backlight and print stuff which won't change and therefore doesn't need to be updated each 500ms
 void setup()
 {
     lcd.init();
@@ -66,19 +66,9 @@ void setup()
     lcd.centerPrint("lcdHelper Example", 2);
     delay(2500);
     lcd.clearLine(2); // This will remove "lcdHelper Example" but keep "Hello!" as we only clear one row
-}
 
 
-// Continously update stuff on the display
-void loop()
-{
-    /* 
-        animationPrint()
-
-        Print a loading and progress animation in the first row beside the centered "Hello!"
-    */
-    lcd.animationPrint(lcd.animations.loading, 8, &animFrameTracker1, 0, 0);
-    lcd.animationPrint(lcd.animations.progress, 6, &animFrameTracker2, 15, 0); // progress is 5 chars wide
+    // End of "startup welcome screen"
 
 
     /*
@@ -115,6 +105,19 @@ void loop()
     */
     lcd.setCursor(0, 2);
     lcd.limitedPrint("Cut off msg - Secret: You won't see this", 10);
+}
+
+
+// Now print stuff that should update every 250ms
+void loop()
+{
+    /* 
+        animationPrint()
+
+        Print a loading and progress animation in the first row beside the centered "Hello!"
+    */
+    lcd.animationPrint(lcd.animations.loading, 8, &animFrameTracker1, 0, 0);
+    lcd.animationPrint(lcd.animations.progress, 6, &animFrameTracker2, 15, 0); // progress is 5 chars wide
 
 
     /* 
