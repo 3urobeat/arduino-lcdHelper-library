@@ -4,7 +4,7 @@
  * Created Date: 22.11.2022 16:50:28
  * Author: 3urobeat
  * 
- * Last Modified: 06.12.2022 12:03:47
+ * Last Modified: 06.12.2022 12:16:00
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -26,9 +26,10 @@
 
 
 // Include libraries
-#include <ESP8266WiFi.h>       // Ignore this import, I'm using an ESP8266 for testing, this import is needed for setup() and loop() to be defined
+#include <ESP8266WiFi.h>         // Ignore this import, I'm using an ESP8266 for testing, this import is needed for setup() and loop() to be defined
 #include <LiquidCrystal_I2C.h>
-#include <lcdHelper.h>
+//#include <lcdHelper.h>         // Normal import when lcdHelper is inside your lib folder - use this one in your project
+#include "../../src/lcdHelper.h" // "Custom" import just for this example as lcdHelper.h is inside src at the project root and not inside lib of this example folder
 
 
 // Init lcdHelper, which inits LiquidCrystal, so we can use our display
