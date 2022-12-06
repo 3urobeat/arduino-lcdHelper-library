@@ -32,6 +32,7 @@ You can now initialize the lib just like shown above by calling the `lcdHelper` 
 
 ## Functions added by lcdHelper
 Check out the example sketch showcasing every function [here](https://github.com/HerrEurobeat/arduino-lcdHelper-library/blob/main/examples/example.cpp)!  
+I included an example PIO config and a copy of `LiquidCrystal_I2C` in the `examples/lib` folder so you can quickly compile & upload the example inside an PIO environment to try it out.
 
 &nbsp;
 
