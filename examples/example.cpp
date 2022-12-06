@@ -4,7 +4,7 @@
  * Created Date: 22.11.2022 16:50:28
  * Author: 3urobeat
  * 
- * Last Modified: 22.11.2022 19:33:42
+ * Last Modified: 06.12.2022 11:32:29
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -34,8 +34,12 @@
 // Init lcdHelper, which inits LiquidCrystal, so we can use our display
 lcdHelper<LiquidCrystal_I2C> lcd(0x27, 20, 4); // My display is a 4x20 HD44780 with address 0x27
 
+// Define two persistent animationFrame vars for animationPrint()
+uint8_t animFrameTracker1 = 0; // uint8_t is an Arduino datatype - an unsigned 8 bit number
+uint8_t animFrameTracker2 = 0;
+
 // Define a persistent moveOffset var for movingPrint()
-uint8_t moveOffset = 0; // uint8_t is an Arduino datatype - an unsigned 8 bit number
+uint8_t moveOffset = 0;
 uint8_t dots       = 0; // also save the dots progress of our little animation for later
 
 
@@ -68,6 +72,15 @@ void setup()
 // Continously update stuff on the display
 void loop()
 {
+    /* 
+        animationPrint()
+
+        Print a loading and progress animation in the first row beside the centered "Hello!"
+    */
+    lcd.animationPrint(lcd.animations.loading, 8, &animFrameTracker1, 0, 0);
+    lcd.animationPrint(lcd.animations.progress, 6, &animFrameTracker2, 15, 0); // progress is 5 chars wide
+
+
     /*
         utf8_strlen()
 
