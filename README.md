@@ -86,6 +86,30 @@ void loop()
 }
 ```
 
+### void animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row)
+- `animationArray` - Pointer to an array containing char arrays for each animation frame
+- `animationSize` - Amount of frames your animation has, counting from 1
+- `animationFrame` - Pointer to int tracking animation progress
+- `col` - The column to print the animation at
+- `row` - The row to print the animation in
+
+Print an animation frame by frame each time the function is called.  
+I provided a few default animations (loading, waiting, bounce, progress, arrows, bouncearrow), accessible like so:  
+```
+uint8_t animationFrame = 0; // Define a var tracking the current frame somewhere at the top scope
+
+void loop()
+{
+    // Print loading animation in row 2 at column 10
+    lcd.animationPrint(lcd.animations.loading, 8, &animationFrame, 10, 1);
+
+    // Example delay
+    delay(250);
+}
+```
+The size of each default animation is written as a comment behind each definition, your IntelliSense should display it for you.  
+Feel free to check out [lcdHelper.h](https://github.com/HerrEurobeat/arduino-lcdHelper-library/blob/main/src/lcdHelper.h) to take a look at all default animations which are defined in a struct.  
+
 ### void alignedPrint(const char *align, const char *str, uint8_t width)
 - `align` - "left", "center" or "right"
 - `str` - The char array to print
