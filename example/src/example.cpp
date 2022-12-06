@@ -4,7 +4,7 @@
  * Created Date: 22.11.2022 16:50:28
  * Author: 3urobeat
  * 
- * Last Modified: 06.12.2022 12:40:58
+ * Last Modified: 06.12.2022 12:44:43
  * Modified By: 3urobeat
  * 
  * Copyright (c) 2022 3urobeat <https://github.com/HerrEurobeat>
@@ -21,7 +21,7 @@
     ------
 
     This example shows you how to use all new functions added by lcdHelper by displaying random stuff on the display.
-    Make sure to download the LiquidCrystal_I2C library first!
+    A copy of the LiquidCrystal_I2C library is included in the lib folder, lcdHelper is referenced from the project_root/src folder.
 */
 
 
