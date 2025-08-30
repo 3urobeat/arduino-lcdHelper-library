@@ -4,7 +4,7 @@
  * Created Date: 2022-11-22 16:50:28
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 13:38:50
+ * Last Modified: 2025-08-30 13:50:56
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -15,7 +15,7 @@
  */
 
 
-/* 
+/*
     lcdHelper v1.1.0 usage example
 
     ------
@@ -51,7 +51,26 @@ void setup()
     lcd.backlight();
 
 
-    /* 
+    /*
+        fadeInPrint()
+
+        Let a message fade in left to right or right to left
+    */
+    // Left to right fade in from the middle of row 1
+    lcd.setCursor(1, 1);
+    lcd.fadeInPrint("lcdHelper Example!");
+
+    // ...or a fade in from right to left with optional options used. In this case the column & row will underflow and the library will handle it with a line break
+    const char fadeInMsg[] = "Underflowing rightToLeft";
+    lcd.setCursor(5, 0);                                           // Will cause a col and row underflow which fadeInPrint will handle
+    lcd.fadeInPrint(fadeInMsg, 25, true, 5, 0, strlen(fadeInMsg)); // A little faster and right to left
+
+    // Clear that mess again
+    delay(2500);
+    lcd.clear();
+
+
+    /*
         centerPrint()
 
         Print a centered Hello! which will stay for the whole runtime
@@ -59,14 +78,14 @@ void setup()
     lcd.centerPrint("Hello!", 0); // We don't need to clear the row beforehand so we don't provide callClearLine as the default value is false
 
 
-    /* 
+    /*
         clearLine()
 
         Print something in line 2 and clear line after 2.5 seconds
     */
-    lcd.centerPrint("lcdHelper Example", 2);
+    lcd.centerPrint("Center Message", 2);
     delay(2500);
-    lcd.clearLine(2); // This will remove "lcdHelper Example" but keep "Hello!" as we only clear one row
+    lcd.clearLine(2); // This will remove "Center message" but keep "Hello!" as we only clear one row
 
 
     // End of "startup welcome screen"
@@ -84,7 +103,7 @@ void setup()
     char tempLen[21] = "UTF8: ";                                     // Temp char array to construct message showing length
 
     char tempUTF8[3] = ""; // Temp char arrs to convert ints returned by strlen() to char arrs
-    char tempByte[3] = "";     
+    char tempByte[3] = "";
 
     itoa(lcd.utf8_strlen(utf8Message), tempUTF8, 10); // Get result from lcdHelper's utf8_strlen() and onvert int to char arr
     itoa(strlen(utf8Message), tempByte, 10);          // Get result from C's string.h strlen() and onvert int to char arr
@@ -112,7 +131,7 @@ void setup()
 // Now print stuff that should update every 250ms
 void loop()
 {
-    /* 
+    /*
         animationPrint()
 
         Print a loading and progress animation in the first row beside the centered "Hello!"
@@ -121,9 +140,9 @@ void loop()
     lcd.animationPrint(lcd.animations.progress, 6, &animFrameTracker2, 15, 0); // progress is 5 chars wide
 
 
-    /* 
+    /*
         alignedPrint()
-    
+
         Print some moving dots aligned to the right of row 2
     */
     dots++;                 // Add another dot
@@ -137,7 +156,7 @@ void loop()
     lcd.alignedPrint("right", tempDots, 4); // Print temp and overwrite any previous dots
 
 
-    /* 
+    /*
         movingPrint()
 
         Let a long message run across 2/3 of the last row
@@ -146,16 +165,16 @@ void loop()
     lcd.movingPrint("  This is a long message moving every 500ms  ", &moveOffset, 14); // Pass address of moveOffset and limit to a width of 14 chars
 
 
-    /* 
+    /*
         toFixedLengthNumber()
 
-        Show seconds of uptime with fixed width at the end of the last row 
+        Show seconds of uptime with fixed width at the end of the last row
     */
     unsigned long uptime = millis() / 1000; // Current uptime in seconds
     char tempSeconds[3] = "";               // Buffer char array with space for two digits and null byte
 
     lcd.toFixedLengthNumber(tempSeconds, uptime % 60, 2); // Add preceding 0 to seconds if <10
-    
+
     lcd.setCursor(18, 3);
     lcd.print(tempSeconds); // Print using the normal print function inherited from LiquidCrystal
 
