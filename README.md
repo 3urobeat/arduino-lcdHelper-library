@@ -55,6 +55,12 @@ lcdHelper<LiquidCrystal_I2C> lcd(0x27, 20, 4);
 
 Clears a specific line on your display.
 
+### int calculateCenterOffset(const char *str)
+- `str` - The char array to get the offset for
+
+Returns column offset from the beginning of a row.  
+Gets the offset from the beginning of a row to display a char array centered. If the char array is longer than the display width, 0 will be returned.
+
 ### void centerPrint(const char *str, uint8_t row, bool callClearLine = false)
 - `str` - The char array to print
 - `row` - The row to print the char array in

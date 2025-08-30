@@ -4,7 +4,7 @@
  * Created Date: 2022-08-26 12:04:51
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 13:50:59
+ * Last Modified: 2025-08-30 14:11:17
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -40,6 +40,13 @@ public:
      * @param row The row to clear (counted from 0)
      */
     void clearLine(uint8_t row);
+
+    /**
+     * Gets the offset from the beginning of a row to display a char array centered. If the char array is longer than the display width, 0 will be returned.
+     * @param str The char array to get the offset for
+     * @return Column offset from the beginning of a row
+     */
+    int calculateCenterOffset(const char *str);
 
     /**
      * Print a char array centered in a row on your display.

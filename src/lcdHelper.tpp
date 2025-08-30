@@ -4,7 +4,7 @@
  * Created Date: 2022-08-28 22:55:04
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 13:51:03
+ * Last Modified: 2025-08-30 14:01:56
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -30,16 +30,23 @@ void lcdHelper<lcd>::clearLine(uint8_t row)
 }
 
 template <typename lcd>
+int lcdHelper<lcd>::calculateCenterOffset(const char *str)
+{
+    int offset = this->_lcdCols - this->utf8_strlen(str);
+    if (offset < 0) offset = 0; // Set offset to 0 if it would be negative
+    return offset / 2;
+}
+
+template <typename lcd>
 void lcdHelper<lcd>::centerPrint(const char *str, uint8_t row, bool callClearLine)
 {
     // clear the line first to avoid old characters corrupting the text when content is not the same
     if (callClearLine) this->clearLine(row);
 
     // Calculate column
-    int offset = this->_lcdCols - this->utf8_strlen(str);
-    if (offset < 0) offset = 0; //set offset to 0 if it would be negative
+    int offset = this->calculateCenterOffset(str);
 
-    this->setCursor(offset / 2, row); //center char array
+    this->setCursor(offset, row); //center char array
     this->print(str);
 }
 
