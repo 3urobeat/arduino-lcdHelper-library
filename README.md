@@ -93,7 +93,7 @@ void loop()
 }
 ```
 
-### fadeInPrint(const char *str, uint8_t fadeInDelay, bool rightToLeft, uint8_t currentCol, uint8_t currentRow, uint8_t length)
+### fadeInPrint(const char *str, uint8_t fadeInDelay, bool rightToLeft, uint8_t currentCol, uint8_t currentRow)
 - `str` - The char array to print
 - `fadeInDelay` - **Optional:** Set a different delay between characters than the default of 50ms
 - `rightToLeft` - **Optional:** Set to true to print from right to left instead of left to right

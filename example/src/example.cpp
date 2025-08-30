@@ -4,7 +4,7 @@
  * Created Date: 2022-11-22 16:50:28
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 14:12:03
+ * Last Modified: 2025-08-30 15:43:55
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -16,7 +16,7 @@
 
 
 /*
-    lcdHelper v1.1.0 usage example
+    lcdHelper v1.2.0 usage example
 
     ------
 

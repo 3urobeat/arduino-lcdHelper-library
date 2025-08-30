@@ -4,7 +4,7 @@
  * Created Date: 2022-08-26 12:04:51
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 14:11:17
+ * Last Modified: 2025-08-30 15:44:04
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -14,7 +14,7 @@
  * Full license information available in the project LICENSE file.
  */
 
-// Version 1.1.0
+// Version 1.2.0
 
 #ifndef LCDHELPER_H
 #define LCDHELPER_H
