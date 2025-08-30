@@ -66,12 +66,12 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t w
 }
 
 template <typename lcd>
-void lcdHelper<lcd>::fadeInPrint(const char *str, uint8_t fadeInDelay, bool rightToLeft, uint8_t currentCol, uint8_t currentRow, uint8_t length)
+void lcdHelper<lcd>::fadeInPrint(const char *str, uint8_t fadeInDelay, bool rightToLeft, uint8_t currentCol, uint8_t currentRow)
 {
     // Right to left? Cursor Management time.
     if (rightToLeft)
     {
-        //this->setCursor(currentCol);
+        int length = this->utf8_strlen(str);
 
         for (uint8_t i = 0; i < length; i++)
         {

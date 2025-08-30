@@ -64,9 +64,8 @@ public:
      * @param rightToLeft Optional: Set to true to print from right to left instead of left to right
      * @param currentCol Semi-Optional: If rightToLeft is true, you must provide the current cursor column here, as the function has to control the cursor now
      * @param currentRow Semi-Optional: If rightToLeft is true, you must provide the current cursor row here, as the function has to control the cursor now
-     * @param length Semi-Optional: If rightToLeft is true, you must set the length of str here as the function has to control the cursor now
      */
-    void fadeInPrint(const char *str, uint8_t fadeInDelay = 50, bool rightToLeft = false, uint8_t currentCol = 0, uint8_t currentRow = 0, uint8_t length = 0);
+    void fadeInPrint(const char *str, uint8_t fadeInDelay = 50, bool rightToLeft = false, uint8_t currentCol = 0, uint8_t currentRow = 0);
 
     /**
      * Print an animation frame by frame each time the function is called

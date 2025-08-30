@@ -4,7 +4,7 @@
  * Created Date: 2022-11-22 16:50:28
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 13:50:56
+ * Last Modified: 2025-08-30 14:12:03
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -62,8 +62,8 @@ void setup()
 
     // ...or a fade in from right to left with optional options used. In this case the column & row will underflow and the library will handle it with a line break
     const char fadeInMsg[] = "Underflowing rightToLeft";
-    lcd.setCursor(5, 0);                                           // Will cause a col and row underflow which fadeInPrint will handle
-    lcd.fadeInPrint(fadeInMsg, 25, true, 5, 0, strlen(fadeInMsg)); // A little faster and right to left
+    lcd.setCursor(5, 0);                        // Will cause a col and row underflow which fadeInPrint will handle
+    lcd.fadeInPrint(fadeInMsg, 25, true, 5, 0); // A little faster and right to left
 
     // Clear that mess again
     delay(2500);

@@ -93,7 +93,6 @@ void loop()
 - `rightToLeft` - **Optional:** Set to true to print from right to left instead of left to right
 - `currentCol` - **Semi-Optional:** If rightToLeft is true, you must provide the current cursor column here, as the function has to control the cursor now
 - `currentRow` - **Semi-Optional:** If rightToLeft is true, you must provide the current cursor row here, as the function has to control the cursor now
-- `length` - **Semi-Optional:** If rightToLeft is true, you must set the length of str here as the function has to control the cursor now
 
 Prints a char array that will fade in left to right, or right to left, from the current cursor position.
 
@@ -105,8 +104,8 @@ lcd.fadeInPrint("lcdHelper Example!");
 
 // More complex right to left fade in, from position col 5, row 0: The function will handle an underflow with a line break
 const char fadeInMsg[] = "Underflowing rightToLeft";
-lcd.setCursor(5, 0);                                           // Will cause a col and row underflow which fadeInPrint will handle
-lcd.fadeInPrint(fadeInMsg, 25, true, 5, 0, strlen(fadeInMsg)); // A little faster and right to left
+lcd.setCursor(5, 0);                        // Will cause a col and row underflow which fadeInPrint will handle
+lcd.fadeInPrint(fadeInMsg, 25, true, 5, 0); // A little faster and right to left
 ```
 
 ### void animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row)
