@@ -1,17 +1,17 @@
 /*
  * File: lcdHelper.h
  * Project: arduino-lcdHelper-library
- * Created Date: 26.08.2022 12:04:51
+ * Created Date: 2022-08-26 12:04:51
  * Author: 3urobeat
- * 
- * Last Modified: 30.06.2023 10:01:00
+ *
+ * Last Modified: 2025-08-30 13:38:03
  * Modified By: 3urobeat
- * 
- * Copyright (c) 2022 3urobeat <https://github.com/3urobeat>
- * 
+ *
+ * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
+ *
  * Licensed under the MIT license: https://opensource.org/licenses/MIT
  * Permission is granted to use, copy, modify, and redistribute the work.
- * Full license information available in the project LICENSE file. 
+ * Full license information available in the project LICENSE file.
  */
 
 // Version 1.1.0
