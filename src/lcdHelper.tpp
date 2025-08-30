@@ -4,7 +4,7 @@
  * Created Date: 2022-08-28 22:55:04
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 13:38:20
+ * Last Modified: 2025-08-30 13:51:03
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -66,6 +66,44 @@ void lcdHelper<lcd>::movingPrint(const char *str, uint8_t *moveOffset, uint8_t w
 }
 
 template <typename lcd>
+void lcdHelper<lcd>::fadeInPrint(const char *str, uint8_t fadeInDelay, bool rightToLeft, uint8_t currentCol, uint8_t currentRow, uint8_t length)
+{
+    // Right to left? Cursor Management time.
+    if (rightToLeft)
+    {
+        //this->setCursor(currentCol);
+
+        for (uint8_t i = 0; i < length; i++)
+        {
+            this->print(*(str + length - i - 1));
+
+            // Check for col & row underflow
+            if (currentCol == 0)
+            {
+                if (currentRow == 0) currentRow = this->_lcdRows;
+                currentRow--;
+                currentCol = this->_lcdCols;
+            }
+
+            currentCol--;
+            this->setCursor(currentCol, currentRow);
+            delay(fadeInDelay);
+        }
+    }
+    else // Left to right? Chill time
+    {
+        // Print next char until reaching null byte
+        while (*str)
+        {
+            this->print(*str++);
+            delay(fadeInDelay);
+        }
+    }
+
+    // TODO: Math function parameter to create dynamic fadeInDelay
+}
+
+template <typename lcd>
 void lcdHelper<lcd>::animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row)
 {
     // Print current frame and overwrite previous one
@@ -74,7 +112,7 @@ void lcdHelper<lcd>::animationPrint(const char **animationArray, uint8_t animati
 
     // Increment index or reset if all frames were displayed
     (*animationFrame)++;
-    
+
     if (*animationFrame > animationSize - 1) *animationFrame = 0;
 }
 
@@ -89,7 +127,7 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
 
     // check if we even have to do something
     if (len == width) {
-        this->print(str); 
+        this->print(str);
         return;
     }
 
@@ -111,7 +149,7 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
             memset(temp, ' ', offset); // offset str with spaces
             strcat(temp, str);         // put str into the middle
             memset(temp + offset + blen, ' ', width - offset - len); // fill remaining space with spaces
-            
+
         } else if (strcmp(align, "right") == 0) {
             memset(temp, ' ', width - len); // offset char array
             strcpy(temp + width - len, str);
@@ -121,14 +159,14 @@ void lcdHelper<lcd>::alignedPrint(const char *align, const char *str, uint8_t wi
     }
 }
 
-template <typename lcd> 
+template <typename lcd>
 void lcdHelper<lcd>::limitedPrint(const char *str, uint8_t length)
 {
     // Check if we actually have to do something
     if (this->utf8_strlen(str) > length) {
         uint8_t currentLen = 0; // UTF-8
         uint8_t index      = 0; // Actual location in the char arr
- 
+
         // Print all chars until utf8_strlen() == length is reached
         while (currentLen < length) { // Check above guarantees we can't exceed
             uint8_t thisCharLen = (*(str + index + 1) & 0xc0) != 0x80; // Count only one byte of a 2 byte long char (from utf8_strlen())
@@ -139,11 +177,11 @@ void lcdHelper<lcd>::limitedPrint(const char *str, uint8_t length)
 
                 strncpy(temp, str + index, 2); // Copy both bytes, then print
                 this->print(temp);
-                
+
                 index += 2; // Count both bytes
             } else {
                 this->print(*(str + index)); // Simply print this char
-                
+
                 index++; // Count this one char
             }
 

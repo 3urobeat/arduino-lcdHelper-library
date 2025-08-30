@@ -4,7 +4,7 @@
  * Created Date: 2022-08-26 12:04:51
  * Author: 3urobeat
  *
- * Last Modified: 2025-08-30 13:38:03
+ * Last Modified: 2025-08-30 13:50:59
  * Modified By: 3urobeat
  *
  * Copyright (c) 2022 - 2025 3urobeat <https://github.com/3urobeat>
@@ -23,7 +23,7 @@
 template <typename lcd>
 class lcdHelper : public lcd { //use template as base to inherit from
 public:
-    
+
     /**
      * Constructor
      * @param addr The address of your display
@@ -56,6 +56,17 @@ public:
      * @param width Width of the space on screen the char array will be moved across
      */
     void movingPrint(const char *str, uint8_t *moveOffset, uint8_t width);
+
+    /**
+     * Prints a char array that will fade in left to right, or right to left, from the current cursor position
+     * @param str The char array to print
+     * @param fadeInDelay Optional: Set a different delay between characters than the default of 50ms
+     * @param rightToLeft Optional: Set to true to print from right to left instead of left to right
+     * @param currentCol Semi-Optional: If rightToLeft is true, you must provide the current cursor column here, as the function has to control the cursor now
+     * @param currentRow Semi-Optional: If rightToLeft is true, you must provide the current cursor row here, as the function has to control the cursor now
+     * @param length Semi-Optional: If rightToLeft is true, you must set the length of str here as the function has to control the cursor now
+     */
+    void fadeInPrint(const char *str, uint8_t fadeInDelay = 50, bool rightToLeft = false, uint8_t currentCol = 0, uint8_t currentRow = 0, uint8_t length = 0);
 
     /**
      * Print an animation frame by frame each time the function is called
@@ -91,7 +102,7 @@ public:
      * @param length The length to limit str to
      */
     void limitedPrint(const char *str, uint8_t length);
-    
+
     /**
      * Custom strlen function to correctly count chars that are two bytes long (like ä ö or ü)
      * @param str The char array to get the length of

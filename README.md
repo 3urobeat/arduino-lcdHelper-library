@@ -58,7 +58,7 @@ Clears a specific line on your display.
 ### void centerPrint(const char *str, uint8_t row, bool callClearLine = false)
 - `str` - The char array to print
 - `row` - The row to print the char array in
-- `callClearLine` - Optional: Set to true if line should be cleared before printing
+- `callClearLine` - **Optional:** Set to true if line should be cleared before printing
 
 Print a char array centered in a row on your display.
 
@@ -85,6 +85,28 @@ void loop()
     // Example delay so you can actually read what is happening on your display
     delay(250);
 }
+```
+
+### fadeInPrint(const char *str, uint8_t fadeInDelay, bool rightToLeft, uint8_t currentCol, uint8_t currentRow, uint8_t length)
+- `str` - The char array to print
+- `fadeInDelay` - **Optional:** Set a different delay between characters than the default of 50ms
+- `rightToLeft` - **Optional:** Set to true to print from right to left instead of left to right
+- `currentCol` - **Semi-Optional:** If rightToLeft is true, you must provide the current cursor column here, as the function has to control the cursor now
+- `currentRow` - **Semi-Optional:** If rightToLeft is true, you must provide the current cursor row here, as the function has to control the cursor now
+- `length` - **Semi-Optional:** If rightToLeft is true, you must set the length of str here as the function has to control the cursor now
+
+Prints a char array that will fade in left to right, or right to left, from the current cursor position.
+
+Example:  
+```
+// Very simple left to right fade in, from position col 1, row 1
+lcd.setCursor(1, 1);
+lcd.fadeInPrint("lcdHelper Example!");
+
+// More complex right to left fade in, from position col 5, row 0: The function will handle an underflow with a line break
+const char fadeInMsg[] = "Underflowing rightToLeft";
+lcd.setCursor(5, 0);                                           // Will cause a col and row underflow which fadeInPrint will handle
+lcd.fadeInPrint(fadeInMsg, 25, true, 5, 0, strlen(fadeInMsg)); // A little faster and right to left
 ```
 
 ### void animationPrint(const char **animationArray, uint8_t animationSize, uint8_t *animationFrame, uint8_t col, uint8_t row)
